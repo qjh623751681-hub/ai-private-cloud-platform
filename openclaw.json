@@ -1,7 +1,7 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.3.13",
-    "lastTouchedAt": "2026-03-24T13:40:17.592Z"
+    "lastTouchedAt": "2026-03-27T03:19:03.529Z"
   },
   "wizard": {
     "lastRunAt": "2026-02-05T16:16:05.545Z",
@@ -18,6 +18,20 @@
       "--window-size=1920,1080",
       "--test-type"
     ]
+  },
+  "acp": {
+    "enabled": true,
+    "backend": "acpx",
+    "defaultAgent": "codex",
+    "allowedAgents": [
+      "codex",
+      "claude",
+      "pi",
+      "opencode",
+      "gemini",
+      "kimi"
+    ],
+    "maxConcurrentSessions": 4
   },
   "models": {
     "providers": {
@@ -174,7 +188,7 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "coze/auto"
+        "primary": "coze/kimi-k2-5-260127"
       },
       "imageModel": {
         "primary": "coze/doubao-seed-1-8-251228"
@@ -196,7 +210,21 @@
         }
       },
       "compaction": {
-        "mode": "safeguard"
+        "mode": "safeguard",
+        "reserveTokensFloor": 32000,
+        "memoryFlush": {
+          "enabled": true,
+          "softThresholdTokens": 6000,
+          "prompt": "Write any lasting notes to memory/YYYY-MM-DD.md; reply with NO_REPLY if nothing to store.",
+          "systemPrompt": "Session nearing compaction. Store durable memories now."
+        }
+      },
+      "heartbeat": {
+        "every": "4h",
+        "activeHours": {
+          "start": "08:00",
+          "end": "22:00"
+        }
       },
       "maxConcurrent": 4,
       "subagents": {
@@ -258,7 +286,7 @@
     },
     "auth": {
       "mode": "token",
-      "token": "0e427be7-7cff-491c-af93-0e3dd59b6f85"
+      "token": "c69356e7-ce07-43b8-b980-239dd3491141"
     },
     "trustedProxies": [
       "::1",
@@ -374,7 +402,8 @@
       "openclaw-lark",
       "coze-openclaw-plugin",
       "openclaw-weixin",
-      "wecom-openclaw-plugin"
+      "wecom-openclaw-plugin",
+      "acpx"
     ],
     "entries": {
       "coze-openclaw-plugin": {
@@ -401,6 +430,14 @@
       },
       "wecom-openclaw-plugin": {
         "enabled": true
+      },
+      "acpx": {
+        "enabled": true,
+        "config": {
+          "command": "/usr/lib/node_modules/openclaw/extensions/acpx/node_modules/.bin/acpx",
+          "permissionMode": "approve-reads",
+          "timeoutSeconds": 300
+        }
       }
     },
     "installs": {
