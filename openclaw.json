@@ -14,9 +14,13 @@
   },
   "browser": {
     "enabled": true,
+    "headless": true,
     "extraArgs": [
       "--window-size=1920,1080",
-      "--test-type"
+      "--test-type",
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage"
     ]
   },
   "acp": {
@@ -229,6 +233,11 @@
       "maxConcurrent": 4,
       "subagents": {
         "maxConcurrent": 8
+      },
+      "sandbox": {
+        "browser": {
+          "enabled": true
+        }
       }
     }
   },
