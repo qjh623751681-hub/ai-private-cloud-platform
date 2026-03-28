@@ -1,7 +1,7 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.3.13",
-    "lastTouchedAt": "2026-03-27T03:19:03.529Z"
+    "lastTouchedAt": "2026-03-28T02:07:16.804Z"
   },
   "wizard": {
     "lastRunAt": "2026-02-05T16:16:05.545Z",
@@ -13,7 +13,7 @@
     "checkOnStart": false
   },
   "browser": {
-    "enabled": false,
+    "enabled": true,
     "extraArgs": [
       "--window-size=1920,1080",
       "--test-type"
@@ -298,7 +298,7 @@
     },
     "nodes": {
       "browser": {
-        "mode": "off"
+        "mode": "auto"
       }
     }
   },
