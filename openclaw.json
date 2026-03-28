@@ -237,8 +237,7 @@
       "wecom_mcp"
     ],
     "deny": [
-      "tts",
-      "browser"
+      "tts"
     ],
     "web": {
       "search": {
