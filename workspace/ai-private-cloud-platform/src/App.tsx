@@ -1,39 +1,26 @@
 
 import { useState, useEffect } from 'react';
 import {
-  Layout, Menu, Card, Row, Col, Statistic, Progress, Table, Tag, Space, Button,
+  Layout, Menu, Card, Row, Col, Progress, Table, Tag, Space, Button,
   List, Timeline, Calendar, Breadcrumb, Dropdown, Avatar, Badge, message,
-  Input, Select, InputNumber, Radio, Checkbox, Form, Descriptions, Steps, Modal, Upload,
-  Alert, Tabs, Tooltip, Popover, Empty, Slider, Switch, Divider, Tree, TreeSelect,
-  DatePicker, UploadProps, UploadFile, UploadChangeParam, Rate, notification,
-  Popconfirm, Transfer, TransferProps, ConfigProvider, Typography, Spin
+  Input, Select, Form, Modal, Tabs, Tooltip, Empty, Switch, Divider,
+  Typography
 } from 'antd';
 import {
   DashboardOutlined, DatabaseOutlined, FileTextOutlined, FolderOutlined,
   CloudUploadOutlined, EditOutlined, DeleteOutlined, EyeOutlined, DownloadOutlined,
-  PlusOutlined, SearchOutlined, FilterOutlined, ReloadOutlined, CloseCircleOutlined,
-  CheckCircleOutlined, ExclamationCircleOutlined, WarningOutlined, InfoCircleOutlined,
-  WarningOutlined as WarningIcon, MoreOutlined, BellOutlined, UserOutlined, LogoutOutlined,
-  MenuFoldOutlined, MenuUnfoldOutlined, QuestionCircleOutlined, ClockCircleOutlined,
-  FileSearchOutlined, TagsOutlined, ShareAltOutlined, SafetyOutlined,
-  CopyOutlined, RocketOutlined, ExperimentOutlined, PlayCircleOutlined, PauseCircleOutlined,
-  BarChartOutlined, TeamOutlined, KeyOutlined, FileOutlined as FileIcon,
-  FolderOpenOutlined, FileTextOutlined as FileTextIcon,
-  CheckCircleOutlined as CheckIcon, CloseCircleOutlined as CloseIcon,
-  UploadOutlined, InboxOutlined, FileZipOutlined, HistoryOutlined,
-  SettingOutlined, ExportOutlined, ImportOutlined, LockOutlined, UnlockOutlined,
-  StarOutlined, StarFilled, FolderOpen, PlusSquareOutlined, MinusSquareOutlined
+  PlusOutlined, SearchOutlined, CheckCircleOutlined, ExclamationCircleOutlined, 
+  WarningOutlined, InfoCircleOutlined, MoreOutlined, BellOutlined, UserOutlined,
+  MenuFoldOutlined, MenuUnfoldOutlined, ExperimentOutlined, UploadOutlined
 } from '@ant-design/icons';
-import type { MenuProps, TabsProps, TreeDataNode, TransferDirection } from 'antd';
+import type { MenuProps } from 'antd';
 import type { UploadProps, UploadFile } from 'antd/es/upload/interface';
+import type { RcFile } from 'antd/es/upload/interface';
 import './App.css';
 
 const { Header, Sider, Content } = Layout;
 const { Option } = Select;
-const { TabPane } = Tabs;
-const { Step } = Steps;
-const { TextArea } = Input;
-const { Text, Title, Paragraph } = Typography;
+const { Text } = Typography;
 
 // ==================== 配置 ====================
 const COLORS = {
@@ -79,7 +66,7 @@ const generateDatasets = (count: number) => {
     const status = statuses[Math.floor(Math.random() * statuses.length)];
     
     return {
-      id: `DS-${String(Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+      id: `DS-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
       name: `${type}数据集-${String(index + 1).padStart(3, '0')}`,
       type,
       description: `用于${['图像分类', '文本分类', '情感分析', '语音识别', '目标检测'][Math.floor(Math.random() * 5)]}任务的数据集，包含${Math.floor(Math.random() * 10000) + 1000}条数据。`,
@@ -217,7 +204,7 @@ function App() {
     name: 'file',
     multiple: true,
     fileList: fileList,
-    onChange(info: UploadChangeParam<UploadFile>) => {
+    onChange: (info: UploadChangeParam<UploadFile>) => {
       setFileList(info.fileList);
       
       if (info.file.status === 'uploading') {
